@@ -6,61 +6,67 @@ class Game
   @turn = 0
   @end = false
   
-  puts "Welcome to TwO-OP-Math-Game(Ruby Edition)"
+  puts "Get ready to play TwO-OPlayer-Math-Game"
   puts
 
-  print 'Player 1 name: '
+  print 'Player 1, please enter your name: '
   @username = gets.chomp
-  p1 = Player.new(@username)
+  player_one = Player.new(@username)
 
-  print 'Player 2 name: '
+  print 'Player 2, please enter your name: '
   @username = gets.chomp
-  p2 = Player.new(@username)
+  player_two = Player.new(@username)
 
-
+  puts
   puts "Alright then, let's get started!"
   puts
-
+  
+  #While @end = false continue asking questions
   while !@end
 
     if @turn == 0
-        print "#{p1.name}: "
+        print "#{player_one.name}: "
     else 
-        print "#{p2.name}: "
+        print "#{player_two.name}: "
     end
       
-    
+    #Initialize a new question
     the_question = Question.new
-    puts question.ask
+    puts the_question.ask
+
+    #Collect the users input
     @player_answer = gets.chomp.to_i
     
+    #Main game loop
     if @turn == 0 && the_question.is_correct?(@player_answer)
-      puts "Nice one, #{p1.name}!"
+      puts "Nice one, #{player_one.name}!"
       @turn += 1
     elsif @turn == 0 && !the_question.is_correct?(@player_answer)
-      puts "You'll get 'em next time #{p1.name}'"
-      p1.wrong_answer
+      puts "You'll get 'em next time #{player_one.name}'"
+      player_one.wrong_answer
       @turn += 1
     elsif @turn == 1 && the_question.is_correct?(@player_answer)
-      puts "Nice one, #{p2.name}!"
+      puts "Nice one, #{player_two.name}!"
       @turn -= 1
     elsif @turn == 1 && !the_question.is_correct?(@player_answer)
-      puts "You'll get 'em next time #{p2.name}'"
-      p2.wrong_answer
+      puts "You'll get 'em next time #{player_two.name}'"
+      player_two.wrong_answer
       @turn -= 1 
     end
- 
-    puts
-    puts "#{p1.name}: #{p1.lives}/3 vs. #{p2.name}: #{p2.lives}/3"
+   
+    #Print score after ever turn
+    puts "*** CURRENT SCORE: ***"
+    puts "#{player_one.name}: #{player_one.lives}/3 vs. #{player_two.name}: #{player_two.lives}/3"
     puts "---------- NEW TURN ----------"
 
-    if p1.game_over? || p2.game_over?
+    #Check if either player has lives remaining 
+    if player_one.game_over? || player_two.game_over?
       puts "Game OVER."
       @end = true
-      if p1.lives < 1
-        puts "The winner is #{p2.name}"
-      elsif p2.lives < 1
-        puts "The winner is #{p1.name}"
+      if player_one.lives < 1
+        puts "The winner is #{player_two.name}"
+      elsif player_two.lives < 1
+        puts "The winner is #{player_one.name}"
     end
 
   end
