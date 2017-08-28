@@ -21,31 +21,30 @@ class Game
   puts "Alright then, let's get started!"
   puts
 
-while !@end
+  while !@end
 
-  case @turn
-    when 0
-      print "#{p1.name}: "
+    if @turn == 0
+        print "#{p1.name}: "
     else 
-      print "#{p2.name}: "
-  end
+        print "#{p2.name}: "
+    end
+      
     
-    
-    question = Question.new
+    the_question = Question.new
     puts question.ask
     @player_answer = gets.chomp.to_i
     
-    if @turn == 0 && question.is_correct?(@player_answer)
+    if @turn == 0 && the_question.is_correct?(@player_answer)
       puts "Nice one, #{p1.name}!"
       @turn += 1
-    elsif @turn == 0 && !question.is_correct?(@player_answer)
+    elsif @turn == 0 && !the_question.is_correct?(@player_answer)
       puts "You'll get 'em next time #{p1.name}'"
       p1.wrong_answer
       @turn += 1
-    elsif @turn == 1 && question.is_correct?(@player_answer)
+    elsif @turn == 1 && the_question.is_correct?(@player_answer)
       puts "Nice one, #{p2.name}!"
       @turn -= 1
-    elsif @turn == 1 && !question.is_correct?(@player_answer)
+    elsif @turn == 1 && !the_question.is_correct?(@player_answer)
       puts "You'll get 'em next time #{p2.name}'"
       p2.wrong_answer
       @turn -= 1 
