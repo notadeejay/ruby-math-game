@@ -55,8 +55,7 @@ class Game
     end
    
     #Print score after ever turn
-    puts "*** CURRENT SCORE: ***"
-    puts "#{player_one.name}: #{player_one.lives}/3 vs. #{player_two.name}: #{player_two.lives}/3"
+    puts "CURRENT SCORE: #{player_one.name}: #{player_one.lives}/3 vs. #{player_two.name}: #{player_two.lives}/3"
     puts "---------- NEW TURN ----------"
 
     #Check if either player has lives remaining 
